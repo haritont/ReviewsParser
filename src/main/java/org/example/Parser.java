@@ -49,6 +49,13 @@ public class Parser {
         }
     }
 
+    public void Print(){
+        for(Company review: companiesReviews){
+            System.out.println(review.getName());
+            System.out.println(review.getReviews());
+        }
+    }
+
     public void End(){
         driver.quit();
     }
