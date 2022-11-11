@@ -2,6 +2,9 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+       Parser parser = new Parser();
+       parser.setUrl("https://nanegative.ru/avia-i-zh-d");
+       parser.Start();
+       parser.End();
     }
 }
