@@ -13,4 +13,8 @@ public class Parser {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public void Start(){
+        driver.get(url);
+    }
 }
