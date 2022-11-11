@@ -16,7 +16,13 @@ public class Parser {
 
     public void Start(){
         driver.get(url);
+        Work();
     }
+
+    public void Work(){
+
+    }
+
     public void End(){
         driver.quit();
     }
