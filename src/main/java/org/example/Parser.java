@@ -1,8 +1,6 @@
 package org.example;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.util.ArrayList;
@@ -39,20 +37,28 @@ public class Parser {
         companiesReviews = new ArrayList<>();
         ArrayList<WebElement> companies = (ArrayList<WebElement>) driver.findElements(new By.ByXPath("//*[@id=\"main\"]/div[1]/div/div/div"));
         for (int i =1; i<=companies.size();i++){
-            Company company = new Company();
             WebElement companyWebElement = companies.get(i-1);
+            Company company = new Company();
             company.setName(companyWebElement.getText().replaceAll("Сохранить", ""));
+
+            JavascriptExecutor jsScroll = (JavascriptExecutor) driver;
+            jsScroll.executeScript("arguments[0].scrollIntoView();", companyWebElement);
+
+
             companyWebElement.findElement(new By.ByXPath("//*[@id=\"main\"]/div[1]/div/div/div["+i+"]/a")).click();
             ArrayList<String> reviews= parsingReviews();
             company.setReviews(reviews);
+
             companiesReviews.add(company);
+
+            driver.navigate().back();
+            companies = (ArrayList<WebElement>) driver.findElements(new By.ByXPath("//*[@id=\"main\"]/div[1]/div/div/div"));
         }
     }
 
     public void Print(){
         for(Company review: companiesReviews){
-            System.out.println(review.getName());
-            System.out.println(review.getReviews());
+           review.print();
         }
     }
 

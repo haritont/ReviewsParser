@@ -21,4 +21,11 @@ public class Company {
     public String getName() {
         return name;
     }
+
+    public void print() {
+        System.out.println(name);
+        for (String review:reviews){
+            System.out.println(review);
+        }
+    }
 }
