@@ -17,4 +17,7 @@ public class Parser {
     public void Start(){
         driver.get(url);
     }
+    public void End(){
+        driver.quit();
+    }
 }
