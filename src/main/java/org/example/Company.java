@@ -23,7 +23,7 @@ public class Company {
     }
 
     public void print() {
-        System.out.println(name);
+        System.out.println("\n"+name);
         for (String review:reviews){
             System.out.println(review);
         }

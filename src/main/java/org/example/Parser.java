@@ -25,19 +25,20 @@ public class Parser {
     }
 
     private ArrayList<String> parsingReviews() {
+        driver.findElement(new By.ByXPath("//*[@id=\"main\"]/div[1]/div[2]/header/a[2]")).click();
         ArrayList<WebElement> reviewsWeb = (ArrayList<WebElement>) driver.findElements(new By.ByXPath("//*[@id=\"main\"]/div[1]/div[2]/div/div"));
         ArrayList<String> reviewsText = new ArrayList<>();
-        for(WebElement review: reviewsWeb){
-            reviewsText.add(review.getText());
+        for(WebElement review: reviewsWeb) {
+            reviewsText.add(review.getText().replaceAll("^— \\d, ", ""));
         }
         return reviewsText;
     }
 
-    private void Work(){
+    private void Work() {
         companiesReviews = new ArrayList<>();
         ArrayList<WebElement> companies = (ArrayList<WebElement>) driver.findElements(new By.ByXPath("//*[@id=\"main\"]/div[1]/div/div/div"));
-        for (int i =1; i<=companies.size();i++){
-            WebElement companyWebElement = companies.get(i-1);
+        for (int i = 1; i <= companies.size(); i++) {
+            WebElement companyWebElement = companies.get(i - 1);
             Company company = new Company();
             company.setName(companyWebElement.getText().replaceAll("Сохранить", ""));
 
@@ -45,8 +46,8 @@ public class Parser {
             jsScroll.executeScript("arguments[0].scrollIntoView();", companyWebElement);
 
 
-            companyWebElement.findElement(new By.ByXPath("//*[@id=\"main\"]/div[1]/div/div/div["+i+"]/a")).click();
-            ArrayList<String> reviews= parsingReviews();
+            companyWebElement.findElement(new By.ByXPath("//*[@id=\"main\"]/div[1]/div/div/div[" + i + "]/a")).click();
+            ArrayList<String> reviews = parsingReviews();
             company.setReviews(reviews);
 
             companiesReviews.add(company);
